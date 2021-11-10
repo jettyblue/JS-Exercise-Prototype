@@ -28,7 +28,7 @@ Airplane.prototype.land = function () {
 
 /*
   TASK 1
-    - Write a Person Constructor that initializes `name` and `age` from arguments.
+    - Write a Person Constructor that initializes `name` and `age` from *** arguments. ***
     - All instances of Person should initialize with an empty `stomach` array.
     - Give instances of Person the ability to `.eat("someFood")`:
         + When eating an edible, it should be pushed into the `stomach`.
@@ -39,14 +39,44 @@ Airplane.prototype.land = function () {
         + It should return a string with `name` and `age`. Example: "Mary, 50"
 */
 
-function Person() {
-  
+function Person(name, age) {  // person constructor that initializes from arguments
+  this.name = name;
+  this.age = age;
+  this.stomach = []; // all instances of Person should initialize with an empty stomach array
 }
 
+Person.prototype.eat = function(edible){ // give instances of Person the ability to eat
+  if(this.stomach.length < 10){
+    this.stomach.push(edible);
+  }
+}
 
+Person.prototype.poop = function(){ // give instances of Person the ability to poop
+  this.stomach = [];  // set to empty array when poops
+}
 
+Person.prototype.toString = function(){ // give instances of Person a method .toString
+  return `${this.name}, ${this.age}`;
+}
 
+const kyler = new Person('Kyler', 25); // create object to check work
+const ben = new Person('Ben', 28);
 
+console.log(kyler.toString()); // logs a string with 'name' and 'age'
+console.log(ben.toString());
+
+ben.eat('pizza');
+ben.eat('tacos');
+ben.eat('sushi');
+ben.eat('ramen');
+ben.eat('sandwich');
+ben.eat('cake');
+
+console.log(ben.stomach); // logs everything in ben's stomach
+
+ben.poop();
+
+console.log(ben.stomach); // logs empty stomach (empty array)
 
 
 /*
@@ -68,6 +98,9 @@ function Car() {
 }
 
 
+
+
+
 /*
   TASK 3
     - Write a Baby constructor subclassing Person.
@@ -80,14 +113,22 @@ function Baby() {
 }
 
 
+
+
+
 /* 
   TASK 4
   In your own words explain the four principles for the "this" keyword below:
-  1. 
-  2. 
-  3. 
-  4. 
+  
+  1. Window binding - If we haven't given 'this' any context it will return the window, the global object in node or undefined in strict mode.
+  
+  2. Implicit binding - Applies to objects with methods. When the function (method) is invoked, look the the left of the dot, that's what 'this' refers to.
+  
+  3. Explicit binding - We tell a function what the 'this' keyword should be using .call, .apply or .bind. Call will immediately invoke the function and you pass in your arguments 1 by 1. Apply will immediately invoke the function and you pass in your arguments as an array. Bind you pass in your arguments 1 by 1, but it will not immediately invoke the function, instead it returns a brand new function that can be invoked later.
+  
+  4. New binding - When a function is invoked with a new keyword the this keyword inside that function is bound to the new object being constructed. When a function is invoked as a constructor function using the new keyword, this points to the new object that’s created
 */
+
 
 
 ///////// END OF CHALLENGE /////////
