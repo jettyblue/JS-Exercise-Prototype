@@ -105,11 +105,26 @@ Car.prototype.fill = function(gallons) { // get fill methods from their prototyp
     this.tank = this.tank + gallons; // fill method increases the tank by the given gallons
   }
 
-const mazda = new Car('Mazda', 20);
+const mazda = new Car('Mazda', 20); // created my own car
 
-console.log('task 2:', mazda.fill(10));
-console.log('task 2:', mazda.tank);
+console.log('task 2:', mazda.fill(10)); // adds 10 gallons to tank but returns undefined
+// could also write as mazda.fill(10);
 
+console.log('task 2:', mazda.tank); // logs 10 because I added 10 gallons to the tank that started at 0
+
+
+// Stretch 1 - Give cars ability to .drive(distance)
+Car.prototype.drive = function(distance) {
+  const driveableMiles = this.tank * this.milesPerGallon;
+  if(distance <= driveableMiles) {
+    this.odometer = this.odometer + distance; // should cause odometer to go up
+    this.tank = this.tank - (distance / this.milesPerGallon); // should cause tank to go down
+  }else{ // Strech 2 - run out of gas
+    this.odometer = this.odometer + driveableMiles;
+    this.tank = 0;
+    return `I ran out of fuel at ${this.odometer} miles`;
+  }
+}
 
 
 /*
@@ -119,12 +134,20 @@ console.log('task 2:', mazda.tank);
     - Besides the methods on Person.prototype, babies have the ability to `.play()`:
         + Should return a string "Playing with x", x being the favorite toy.
 */
-function Baby() {
- 
+
+function Baby(name, age, favoriteToy) {
+  Person.call(this, name, age); // Baby constructor takes name and age arguments from Person
+  this.favoriteToy = favoriteToy; // Baby takes their own argument to initialize
 }
 
+Baby.prototype = Object.create(Person.prototype); // Baby takes methods on Person prototypes
+Baby.prototype.play = function() { // Adds Baby's ability to 'play' to prototypes
+  return `Playing with ${this.favoriteToy}`;
+}
 
+const lindsay = new Baby('Lindsay', 2, 'stuffie'); // created my own new Baby
 
+console.log('task 3:', lindsay.play()); // logs "Playing with stuffie"
 
 
 /* 
