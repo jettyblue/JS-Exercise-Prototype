@@ -62,8 +62,8 @@ Person.prototype.toString = function(){ // give instances of Person a method .to
 const kyler = new Person('Kyler', 25); // create object to check work
 const ben = new Person('Ben', 28);
 
-console.log(kyler.toString()); // logs a string with 'name' and 'age'
-console.log(ben.toString());
+console.log('task 1:', kyler.toString()); // logs a string with 'name' and 'age'
+console.log('task 1:', ben.toString());
 
 ben.eat('pizza');
 ben.eat('tacos');
@@ -72,11 +72,12 @@ ben.eat('ramen');
 ben.eat('sandwich');
 ben.eat('cake');
 
-console.log(ben.stomach); // logs everything in ben's stomach
+console.log('task 1 - Bens stomach:', ben.stomach); // logs everything in ben's stomach
 
 ben.poop();
 
-console.log(ben.stomach); // logs empty stomach (empty array)
+console.log('task 1 - Bens stomach after using the bathroom:', ben.stomach); // logs empty stomach (empty array)
+
 
 
 /*
@@ -93,11 +94,21 @@ console.log(ben.stomach); // logs empty stomach (empty array)
         + The `drive` method should return a string "I ran out of fuel at x miles!" x being `odometer`.
 */
 
-function Car() {
-  
+function Car(model, milesPerGallon) {
+  this.model = model;
+  this.milesPerGallon = milesPerGallon;
+  this.tank = 0;
+  this.odometer = 0;
 }
 
+Car.prototype.fill = function(gallons) { // get fill methods from their prototype
+    this.tank = this.tank + gallons; // fill method increases the tank by the given gallons
+  }
 
+const mazda = new Car('Mazda', 20);
+
+console.log('task 2:', mazda.fill(10));
+console.log('task 2:', mazda.tank);
 
 
 
